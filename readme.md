@@ -37,7 +37,7 @@
 ├── data.json  #for data
 ├── resell-ticket # for reselling
 ├── data.json # (If used) Local event data
-├── mainpage.html,mainpage.js # Homepage with event listings
+├── index.html,mainpage.js # Homepage with event listings
 ├── forgetpassword.html # Firebase forgetpassword
 ├── my-orders.html # for viewing orders
 ├── privacy # to know about privacypolicy

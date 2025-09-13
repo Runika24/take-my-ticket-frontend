@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function goBack() {
-  window.location.href = "mainpage.html";
+  window.location.href = "index.html";
 }
 
 function bookNow(id) {

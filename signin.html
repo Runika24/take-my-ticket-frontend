@@ -170,7 +170,7 @@
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           alert("Signup successful!");
-          window.location.href = "mainpage.html";
+          window.location.href = "index.html";
         })
         .catch((error) => {
           alert("Signup failed: " + error.message);
