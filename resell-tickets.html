@@ -1,0 +1,571 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resale Tickets - TakeMyTickets</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #ff1659 !important;
+            font-size: 1.5rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(255, 22, 89, 0.9), rgba(255, 64, 129, 0.9));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .search-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: -2rem auto 2rem;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .ticket-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .ticket-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .ticket-header {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 1.5rem;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .ticket-body {
+            padding: 1.5rem;
+        }
+
+        .price-tag {
+            background: linear-gradient(135deg, #ff1659, #ff4081);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .savings {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .seller-info {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff1659, #ff4081);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 22, 89, 0.4);
+        }
+
+        .btn-outline-primary {
+            border: 2px solid #ff1659;
+            color: #ff1659;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-primary:hover {
+            background: #ff1659;
+            border-color: #ff1659;
+        }
+
+        .filter-sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 1.5rem;
+            height: fit-content;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .badge {
+            font-size: 0.8rem;
+            padding: 0.5rem 0.8rem;
+        }
+
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #ff1659;
+            box-shadow: 0 0 0 0.2rem rgba(255, 22, 89, 0.25);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 2rem 0;
+            }
+            
+            .search-section {
+                margin: -1rem 1rem 1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="./mainpage.html">
+                <i class="bi bi-ticket-perforated"></i> TakeMyTickets
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./mainpage.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./mainpage.html">Browse Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./resell-tickets.html">Resale Tickets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./sell-tickets.html">Sell Tickets</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1><i class="bi bi-arrow-repeat"></i> Resale Tickets Marketplace</h1>
+            <p class="lead">Find great deals on tickets from verified sellers</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <div class="container">
+        <div class="search-section">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="searchEvent" placeholder="Search events...">
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="concerts">Concerts</option>
+                        <option value="sports">Sports</option>
+                        <option value="theater">Theater</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="festivals">Festivals</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-select" id="priceRange">
+                        <option value="">Any Price</option>
+                        <option value="0-50">Under $50</option>
+                        <option value="50-100">$50 - $100</option>
+                        <option value="100-200">$100 - $200</option>
+                        <option value="200+">$200+</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary w-100" onclick="searchResaleTickets()">
+                        <i class="bi bi-search"></i> Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <!-- Filters Sidebar -->
+            <div class="col-lg-3 mb-4">
+                <div class="filter-sidebar">
+                    <h5><i class="bi bi-funnel"></i> Filters</h5>
+                    <hr>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Date Range</label>
+                        <input type="date" class="form-control mb-2" id="dateFrom">
+                        <input type="date" class="form-control" id="dateTo">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Location</label>
+                        <select class="form-select" id="locationFilter">
+                            <option value="">All Locations</option>
+                            <option value="new-york">New York</option>
+                            <option value="los-angeles">Los Angeles</option>
+                            <option value="chicago">Chicago</option>
+                            <option value="miami">Miami</option>
+                            <option value="las-vegas">Las Vegas</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Ticket Type</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="generalAdmission">
+                            <label class="form-check-label" for="generalAdmission">General Admission</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="vipTickets">
+                            <label class="form-check-label" for="vipTickets">VIP</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="premiumTickets">
+                            <label class="form-check-label" for="premiumTickets">Premium</label>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-outline-primary w-100" onclick="clearFilters()">
+                        <i class="bi bi-x-circle"></i> Clear Filters
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tickets List -->
+            <div class="col-lg-9">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4>Available Resale Tickets</h4>
+                    <select class="form-select w-auto" id="sortBy">
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="date">Date: Earliest First</option>
+                        <option value="newest">Newest Listings</option>
+                    </select>
+                </div>
+
+                <div id="ticketsList">
+                   
+                    <div class="ticket-card">
+                        <div class="ticket-header">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h5 class="mb-1">Taylor Swift - Eras Tour</h5>
+                                    <p class="mb-0 text-muted">
+                                        <i class="bi bi-geo-alt"></i> Madison Square Garden, New York
+                                        <span class="ms-3"><i class="bi bi-calendar"></i> Dec 15, 2024</span>
+                                        <span class="ms-3"><i class="bi bi-clock"></i> 8:00 PM</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <span class="badge bg-success">Verified Seller</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ticket-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="mb-2">
+                                        <strong>Section A, Row 5, Seats 12-13</strong>
+                                        <span class="badge bg-primary ms-2">Premium</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <span class="price-tag">$450 each</span>
+                                        <span class="original-price ms-2">Original: $500</span>
+                                        <span class="savings ms-2">Save $50!</span>
+                                    </div>
+                                    <div class="seller-info">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-person-circle fs-4 me-2"></i>
+                                            <div>
+                                                <strong>Sarah M.</strong>
+                                                <div class="text-muted small">
+                                                    <i class="bi bi-star-fill text-warning"></i> 4.9 (23 reviews)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <div class="mb-2">
+                                        <strong>2 tickets available</strong>
+                                    </div>
+                                    <button class="btn btn-primary mb-2 w-100" onclick="handleResaleTicket('buy', 'ticket-1')">
+                                        <i class="bi bi-cart-plus"></i> Buy Now
+                                    </button>
+                                    <button class="btn btn-outline-primary w-100" onclick="handleResaleTicket('contact', 'ticket-1')">
+                                        <i class="bi bi-chat-dots"></i> Contact Seller
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ticket-card">
+                        <div class="ticket-header">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h5 class="mb-1">NBA Finals Game 4</h5>
+                                    <p class="mb-0 text-muted">
+                                        <i class="bi bi-geo-alt"></i> Crypto.com Arena, Los Angeles
+                                        <span class="ms-3"><i class="bi bi-calendar"></i> Jan 20, 2025</span>
+                                        <span class="ms-3"><i class="bi bi-clock"></i> 6:00 PM</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <span class="badge bg-warning text-dark">Mobile Transfer</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ticket-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="mb-2">
+                                        <strong>Lower Bowl, Section 118, Row 8</strong>
+                                        <span class="badge bg-success ms-2">Great View</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <span class="price-tag">$280 each</span>
+                                        <span class="original-price ms-2">Original: $320</span>
+                                        <span class="savings ms-2">Save $40!</span>
+                                    </div>
+                                    <div class="seller-info">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-person-circle fs-4 me-2"></i>
+                                            <div>
+                                                <strong>Mike R.</strong>
+                                                <div class="text-muted small">
+                                                    <i class="bi bi-star-fill text-warning"></i> 4.7 (15 reviews)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <div class="mb-2">
+                                        <strong>4 tickets available</strong>
+                                    </div>
+                                    <button class="btn btn-primary mb-2 w-100" onclick="handleResaleTicket('buy', 'ticket-2')">
+                                        <i class="bi bi-cart-plus"></i> Buy Now
+                                    </button>
+                                    <button class="btn btn-outline-primary w-100" onclick="handleResaleTicket('contact', 'ticket-2')">
+                                        <i class="bi bi-chat-dots"></i> Contact Seller
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ticket-card">
+                        <div class="ticket-header">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h5 class="mb-1">Hamilton - Broadway Musical</h5>
+                                    <p class="mb-0 text-muted">
+                                        <i class="bi bi-geo-alt"></i> Richard Rodgers Theatre, New York
+                                        <span class="ms-3"><i class="bi bi-calendar"></i> Feb 8, 2025</span>
+                                        <span class="ms-3"><i class="bi bi-clock"></i> 2:00 PM</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <span class="badge bg-success">Verified Seller</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ticket-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="mb-2">
+                                        <strong>Orchestra, Row J, Seats 15-16</strong>
+                                        <span class="badge bg-warning text-dark ms-2">Center</span>
+                                    </div>
+                                    <div class="mb-3">
+                                        <span class="price-tag">$195 each</span>
+                                        <span class="original-price ms-2">Original: $220</span>
+                                        <span class="savings ms-2">Save $25!</span>
+                                    </div>
+                                    <div class="seller-info">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-person-circle fs-4 me-2"></i>
+                                            <div>
+                                                <strong>Jennifer L.</strong>
+                                                <div class="text-muted small">
+                                                    <i class="bi bi-star-fill text-warning"></i> 5.0 (8 reviews)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <div class="mb-2">
+                                        <strong>2 tickets available</strong>
+                                    </div>
+                                    <button class="btn btn-primary mb-2 w-100" onclick="handleResaleTicket('buy', 'ticket-3')">
+                                        <i class="bi bi-cart-plus"></i> Buy Now
+                                    </button>
+                                    <button class="btn btn-outline-primary w-100" onclick="handleResaleTicket('contact', 'ticket-3')">
+                                        <i class="bi bi-chat-dots"></i> Contact Seller
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <nav aria-label="Tickets pagination" class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item active">
+                            <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">2</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">3</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>TakeMyTickets</h5>
+                    <p>Your trusted marketplace for event tickets</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <a href="./mainpage.html" class="text-white text-decoration-none me-3">Home</a>
+                    <a href="./privacypolicy.html" class="text-white text-decoration-none me-3">Privacy Policy</a>
+                    <a href="#" class="text-white text-decoration-none" onclick="contactUs()">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        
+        function searchResaleTickets() {
+            const searchTerm = document.getElementById('searchEvent').value;
+            const category = document.getElementById('categoryFilter').value;
+            const priceRange = document.getElementById('priceRange').value;
+            
+            console.log('Searching resale tickets:', { searchTerm, category, priceRange });
+            
+        }
+
+        
+        function clearFilters() {
+            document.getElementById('searchEvent').value = '';
+            document.getElementById('categoryFilter').value = '';
+            document.getElementById('priceRange').value = '';
+            document.getElementById('dateFrom').value = '';
+            document.getElementById('dateTo').value = '';
+            document.getElementById('locationFilter').value = '';
+            document.getElementById('generalAdmission').checked = false;
+            document.getElementById('vipTickets').checked = false;
+            document.getElementById('premiumTickets').checked = false;
+            
+           
+            searchResaleTickets();
+        }
+
+        
+        function handleResaleTicket(action, ticketId) {
+            console.log(`${action} resale ticket: ${ticketId}`);
+            
+           
+            const isLoggedIn = localStorage.getItem("isLoggedIn");
+            if (isLoggedIn !== "true") {
+                alert("Please login to access this feature");
+                return;
+            }
+            
+            switch(action) {
+                case 'buy':
+                    window.location.href = `./buy-resale.html?ticket=${ticketId}`;
+                    break;
+                case 'contact':
+                    alert('Contact seller feature coming soon!');
+                    break;
+                default:
+                    console.log('Unknown action:', action);
+            }
+        }
+
+      
+        function contactUs() {
+            alert('Contact us at support@takemytickets.com or call +91-XXXXXXXXXX');
+        }
+    </script>
+</body>

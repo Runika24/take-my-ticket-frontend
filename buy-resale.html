@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Re-sell Tickets - TakeMyTickets</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+        }
+        .container-custom {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .form-control:focus {
+            border-color: #ff1659;
+            box-shadow: 0 0 0 0.2rem rgba(255, 22, 89, 0.25);
+        }
+        .btn-primary {
+            background-color: #ff1659;
+            border-color: #ff1659;
+        }
+        .btn-primary:hover {
+            background-color: #d91448;
+            border-color: #d91448;
+        }
+        .upload-area {
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            background: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .upload-area:hover {
+            border-color: #ff1659;
+            background: #fff5f5;
+        }
+        .ticket-preview {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2c3e50;">
+        <div class="container">
+            <a class="navbar-brand" href="mainpage.html">
+                <i class="bi bi-ticket-perforated"></i> TakeMyTickets
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="mainpage.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:void(0)" onclick="browseEvents()">Events</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-custom">
+        <div class="text-center mb-4">
+            <h1 class="display-5 fw-bold text-primary">Re-sell Your Tickets</h1>
+            <p class="lead">List your tickets for resale and connect with buyers</p>
+        </div>
+
+        <form id="resellForm">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="eventName" class="form-label">Event Name *</label>
+                    <input type="text" class="form-control" id="eventName" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="eventDate" class="form-label">Event Date *</label>
+                    <input type="date" class="form-control" id="eventDate" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="venue" class="form-label">Venue *</label>
+                    <input type="text" class="form-control" id="venue" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="eventTime" class="form-label">Event Time</label>
+                    <input type="time" class="form-control" id="eventTime">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="ticketType" class="form-label">Ticket Type *</label>
+                    <select class="form-control" id="ticketType" required>
+                        <option value="">Select Type</option>
+                        <option value="general">General Admission</option>
+                        <option value="vip">VIP</option>
+                        <option value="premium">Premium</option>
+                        <option value="front-row">Front Row</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="quantity" class="form-label">Number of Tickets *</label>
+                    <input type="number" class="form-control" id="quantity" min="1" max="10" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="originalPrice" class="form-label">Original Price (₹) *</label>
+                    <input type="number" class="form-control" id="originalPrice" min="0" step="0.01" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="sellingPrice" class="form-label">Selling Price (₹) *</label>
+                    <input type="number" class="form-control" id="sellingPrice" min="0" step="0.01" required>
+                    <small class="text-muted">Price per ticket</small>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="seatInfo" class="form-label">Seat Information</label>
+                    <input type="text" class="form-control" id="seatInfo" placeholder="e.g., Section A, Row 5, Seats 12-13">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Additional Information</label>
+                <textarea class="form-control" id="description" rows="3" placeholder="Any additional details about the tickets..."></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Upload Ticket Images *</label>
+                <div class="upload-area" onclick="document.getElementById('ticketImages').click()">
+                    <i class="bi bi-cloud-upload fs-1 text-muted"></i>
+                    <p class="mt-2">Click to upload ticket images</p>
+                    <small class="text-muted">PNG, JPG up to 5MB each</small>
+                </div>
+                <input type="file" id="ticketImages" multiple accept="image/*" style="display: none;" onchange="previewImages()">
+                <div id="imagePreview" class="mt-3"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="contactName" class="form-label">Your Name *</label>
+                    <input type="text" class="form-control" id="contactName" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="contactPhone" class="form-label">Phone Number *</label>
+                    <input type="tel" class="form-control" id="contactPhone" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="contactEmail" class="form-label">Email Address *</label>
+                <input type="email" class="form-control" id="contactEmail" required>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="terms" required>
+                <label class="form-check-label" for="terms">
+                    I agree to the <a href="privacypolicy.html" target="_blank">Terms and Conditions</a> and confirm that these tickets are genuine
+                </label>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="bi bi-ticket-detailed"></i> List Tickets for Resale
+                </button>
+                <button type="button" class="btn btn-outline-secondary" onclick="window.history.back()">
+                    <i class="bi bi-arrow-left"></i> Back
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function previewImages() {
+            const files = document.getElementById('ticketImages').files;
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = '';
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.maxWidth = '200px';
+                    img.style.maxHeight = '200px';
+                    img.className = 'img-thumbnail me-2 mb-2';
+                    preview.appendChild(img);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        document.getElementById('resellForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            
+            const formData = new FormData();
+            formData.append('eventName', document.getElementById('eventName').value);
+            formData.append('eventDate', document.getElementById('eventDate').value);
+            formData.append('venue', document.getElementById('venue').value);
+            formData.append('eventTime', document.getElementById('eventTime').value);
+            formData.append('ticketType', document.getElementById('ticketType').value);
+            formData.append('quantity', document.getElementById('quantity').value);
+            formData.append('originalPrice', document.getElementById('originalPrice').value);
+            formData.append('sellingPrice', document.getElementById('sellingPrice').value);
+            formData.append('seatInfo', document.getElementById('seatInfo').value);
+            formData.append('description', document.getElementById('description').value);
+            formData.append('contactName', document.getElementById('contactName').value);
+            formData.append('contactPhone', document.getElementById('contactPhone').value);
+            formData.append('contactEmail', document.getElementById('contactEmail').value);
+
+            
+            const images = document.getElementById('ticketImages').files;
+            for (let i = 0; i < images.length; i++) {
+                formData.append('images', images[i]);
+            }
+
+            
+            alert('Your tickets have been listed successfully! You will be contacted by potential buyers.');
+            window.location.href = 'mainpage.html';
+        });
+
+       
+        document.getElementById('sellingPrice').addEventListener('input', updateTotal);
+        document.getElementById('quantity').addEventListener('input', updateTotal);
+
+        function updateTotal() {
+            const price = parseFloat(document.getElementById('sellingPrice').value) || 0;
+            const quantity = parseInt(document.getElementById('quantity').value) || 0;
+            const total = price * quantity;
+            
+            
+            console.log('Total amount:', total);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - TakeMyTickets</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .settings-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            max-width: 800px;
+            padding: 40px;
+        }
+        
+        .settings-header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1e3c72;
+        }
+        
+        .settings-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #ff1659;
+        }
+        
+        .settings-section h5 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #ff1659;
+            box-shadow: 0 0 0 0.2rem rgba(255, 22, 89, 0.25);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #ff1659, #d91448);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 22, 89, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-weight: 600;
+        }
+        
+        .form-check-input:checked {
+            background-color: #ff1659;
+            border-color: #ff1659;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50px;
+            padding: 10px 20px;
+            color: #1e3c72;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: white;
+            color: #ff1659;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <a href="./mainpage.html" class="back-btn">
+        <i class="bi bi-arrow-left"></i> Back to Home
+    </a>
+
+    <div class="container">
+        <div class="settings-container">
+            <div class="settings-header">
+                <h1><i class="bi bi-gear"></i> Account Settings</h1>
+                <p class="text-muted">Manage your account preferences and settings</p>
+            </div>
+
+            <form id="settingsForm">
+                <!-- Personal Information -->
+                <div class="settings-section">
+                    <h5><i class="bi bi-person"></i> Personal Information</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email address">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="Enter phone number">
+                    </div>
+                </div>
+
+                <!-- Location Preferences -->
+                <div class="settings-section">
+                    <h5><i class="bi bi-geo-alt"></i> Location Preferences</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="city" class="form-label">Preferred City</label>
+                            <select class="form-control" id="city">
+                                <option value="">Select City</option>
+                                <option value="hyderabad">Hyderabad</option>
+                                <option value="bangalore">Bangalore</option>
+                                <option value="mumbai">Mumbai</option>
+                                <option value="delhi">Delhi</option>
+                                <option value="chennai">Chennai</option>
+                                <option value="pune">Pune</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="state" class="form-label">State</label>
+                            <input type="text" class="form-control" id="state" placeholder="Enter state">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notification Preferences -->
+                <div class="settings-section">
+                    <h5><i class="bi bi-bell"></i> Notification Preferences</h5>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                        <label class="form-check-label" for="emailNotifications">
+                            Email notifications for new events
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="smsNotifications">
+                        <label class="form-check-label" for="smsNotifications">
+                            SMS notifications for booking confirmations
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="pushNotifications" checked>
+                        <label class="form-check-label" for="pushNotifications">
+                            Push notifications for event reminders
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="marketingEmails">
+                        <label class="form-check-label" for="marketingEmails">
+                            Marketing emails and promotions
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Privacy Settings -->
+                <div class="settings-section">
+                    <h5><i class="bi bi-shield-check"></i> Privacy Settings</h5>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="profilePrivate">
+                        <label class="form-check-label" for="profilePrivate">
+                            Make my profile private
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="shareData">
+                        <label class="form-check-label" for="shareData">
+                            Allow data sharing for better recommendations
+                        </label>
+                    </div>
+                </div>
+
+               
+                <div class="settings-section">
+                    <h5><i class="bi bi-lock"></i> Security Settings</h5>
+                    <div class="mb-3">
+                        <label for="currentPassword" class="form-label">Current Password</label>
+                        <input type="password" class="form-control" id="currentPassword" placeholder="Enter current password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="newPassword" placeholder="Enter new password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm new password">
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="twoFactorAuth">
+                        <label class="form-check-label" for="twoFactorAuth">
+                            Enable two-factor authentication
+                        </label>
+                    </div>
+                </div>
+
+               
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary me-3">
+                        <i class="bi bi-check-lg"></i> Save Settings
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                        <i class="bi bi-arrow-clockwise"></i> Reset
+                    </button>
+                </div>
+            </form>
+
+           
+            <div class="settings-section mt-4" style="border-left-color: #dc3545;">
+                <h5 style="color: #dc3545;"><i class="bi bi-exclamation-triangle"></i> Danger Zone</h5>
+                <p class="text-muted mb-3">These actions cannot be undone. Please proceed with caution.</p>
+                <button type="button" class="btn btn-outline-danger" onclick="deactivateAccount()">
+                    <i class="bi bi-person-x"></i> Deactivate Account
+                </button>
+                <button type="button" class="btn btn-danger ms-2" onclick="deleteAccount()">
+                    <i class="bi bi-trash"></i> Delete Account
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+     
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserSettings();
+        });
+
+        function loadUserSettings() {
+           
+            const savedSettings = JSON.parse(localStorage.getItem('userSettings') || '{}');
+            
+            Object.keys(savedSettings).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (element.type === 'checkbox') {
+                        element.checked = savedSettings[key];
+                    } else {
+                        element.value = savedSettings[key];
+                    }
+                }
+            });
+        }
+
+        document.getElementById('settingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (newPassword && newPassword !== confirmPassword) {
+                alert('New passwords do not match!');
+                return;
+            }
+            
+            
+            const formData = new FormData(this);
+            const settings = {};
+            
+            const inputs = this.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    settings[input.id] = input.checked;
+                } else if (input.type !== 'password') {
+                    settings[input.id] = input.value;
+                }
+            });
+            
+           
+            localStorage.setItem('userSettings', JSON.stringify(settings));
+            
+            alert('Settings saved successfully!');
+     
+        });
+
+        function resetForm() {
+            if (confirm('Are you sure you want to reset all settings?')) {
+                document.getElementById('settingsForm').reset();
+                localStorage.removeItem('userSettings');
+                loadUserSettings();
+            }
+        }
+
+        function deactivateAccount() {
+            if (confirm('Are you sure you want to deactivate your account? You can reactivate it later by logging in.')) {
+               
+                localStorage.setItem('accountStatus', 'deactivated');
+                alert('Account deactivated successfully. You can reactivate it by logging in again.');
+                window.location.href = './mainpage.html';
+            }
+        }
+
+        function deleteAccount() {
+            const confirmation = prompt('Type "DELETE" to confirm account deletion:');
+            if (confirmation === 'DELETE') {
+                if (confirm('This will permanently delete your account and all data. Are you absolutely sure?')) {
+                  
+                    localStorage.clear();
+                    alert('Account deleted successfully. You will be redirected to the home page.');
+                    window.location.href = './mainpage.html';
+                }
+            } else if (confirmation !== null) {
+                alert('Account deletion cancelled. You must type "DELETE" exactly.');
+            }
+        }
+    </script>
+</body>
+
+</html>
